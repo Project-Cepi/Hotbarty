@@ -10,7 +10,10 @@ import world.cepi.kstom.event.listenOnly
 class HotbartyExtension : Extension() {
 
     override fun initialize() {
+        logger.info("[Hotbarty] has been enabled!")
+    }
 
+    override fun postInitialize() {
         eventNode.listenOnly<PlayerSpawnEvent> {
             HotbartyManager.refresh(player)
         }
@@ -22,8 +25,6 @@ class HotbartyExtension : Extension() {
         eventNode.listenOnly<ItemDropEvent> {
             if (HotbartyManager.containsValue(itemStack)) return@listenOnly
         }
-
-        logger.info("[Hotbarty] has been enabled!")
     }
 
     override fun terminate() {
