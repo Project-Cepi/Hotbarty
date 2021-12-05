@@ -1,6 +1,7 @@
 package world.cepi.hotbarty
 
 import net.minestom.server.event.inventory.InventoryClickEvent
+import net.minestom.server.event.inventory.InventoryPreClickEvent
 import net.minestom.server.event.item.ItemDropEvent
 import net.minestom.server.event.player.PlayerSpawnEvent
 import net.minestom.server.event.player.PlayerUseItemEvent
@@ -18,12 +19,18 @@ class HotbartyExtension : Extension() {
             HotbartyManager.refresh(player)
         }
 
-        eventNode.listenOnly<InventoryClickEvent> {
-            if (HotbartyManager.containsKey(slot)) return@listenOnly
+        eventNode.listenOnly<InventoryPreClickEvent> {
+            if (HotbartyManager.containsKey(slot)) {
+                isCancelled = true
+                return@listenOnly
+            }
         }
 
         eventNode.listenOnly<ItemDropEvent> {
-            if (HotbartyManager.containsValue(itemStack)) return@listenOnly
+            if (HotbartyManager.containsValue(itemStack)) {
+                isCancelled = true
+                return@listenOnly
+            }
         }
     }
 
