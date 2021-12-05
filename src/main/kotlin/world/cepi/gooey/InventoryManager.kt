@@ -11,7 +11,7 @@ object InventoryManager {
     fun slot(slot: Int): ItemStack? = internalMap[slot]
     fun hasItem(item: ItemStack) = internalMap.containsValue(item)
 
-    fun put(slot: Int, itemStack: ItemStack) {
+    operator fun set(slot: Int, itemStack: ItemStack) {
         internalMap[slot] = itemStack
     }
 
