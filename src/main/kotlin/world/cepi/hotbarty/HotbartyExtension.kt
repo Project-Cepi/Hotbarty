@@ -1,6 +1,7 @@
 package world.cepi.hotbarty
 
 import net.minestom.server.event.inventory.InventoryClickEvent
+import net.minestom.server.event.item.ItemDropEvent
 import net.minestom.server.event.player.PlayerSpawnEvent
 import net.minestom.server.event.player.PlayerUseItemEvent
 import net.minestom.server.extensions.Extension;
@@ -15,7 +16,11 @@ class HotbartyExtension : Extension() {
         }
 
         eventNode.listenOnly<InventoryClickEvent> {
-            if (HotbartyManager.containsKey(this.slot)) return@listenOnly
+            if (HotbartyManager.containsKey(slot)) return@listenOnly
+        }
+
+        eventNode.listenOnly<ItemDropEvent> {
+            if (HotbartyManager.containsValue(itemStack)) return@listenOnly
         }
 
         logger.info("[Hotbarty] has been enabled!")
