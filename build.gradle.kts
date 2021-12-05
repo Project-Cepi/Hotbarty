@@ -40,6 +40,9 @@ dependencies {
     // Compile Minestom into project
     compileOnly("com.github.Minestom:Minestom:-SNAPSHOT")
 
+    // Add KStom
+    compileOnly("com.github.Project-Cepi:KStom:6af27a215d")
+
     // import kotlinx serialization
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
 }
@@ -92,7 +95,7 @@ publishing {
 }
 
 val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions.jvmTarget = JavaVersion.VERSION_16.toString()
+compileKotlin.kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
 
 compileKotlin.kotlinOptions {
     freeCompilerArgs = listOf("-Xinline-classes")
