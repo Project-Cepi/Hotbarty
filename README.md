@@ -1,9 +1,9 @@
-# Hotbarty
+# Gooey
 [![license](https://img.shields.io/github/license/Project-Cepi/Hotbarty?style=for-the-badge&color=b2204c)](../LICENSE)
 [![wiki](https://img.shields.io/badge/documentation-wiki-74aad6?style=for-the-badge)](https://project-cepi.github.io/)
 [![discord-banner](https://img.shields.io/discord/706185253441634317?label=discord&style=for-the-badge&color=7289da)](https://discord.cepi.world/8K8WMGV)
 
-Hotbar manager
+GUI manager
 
 ## Installation
 
