@@ -5,35 +5,38 @@ import net.minestom.server.event.item.ItemDropEvent
 import net.minestom.server.event.player.PlayerSpawnEvent
 import net.minestom.server.extensions.Extension;
 import world.cepi.kstom.event.listenOnly
+import world.cepi.kstom.util.log
+import world.cepi.kstom.util.node
 
 class GooeyExtension : Extension() {
 
-    override fun initialize() {
-        logger.info("[Gooey] has been enabled!")
-    }
+    override fun initialize(): LoadStatus {
 
-    override fun postInitialize() {
-        eventNode.listenOnly<PlayerSpawnEvent> {
+        node.listenOnly<PlayerSpawnEvent> {
             InventoryManager.refresh(player)
         }
 
-        eventNode.listenOnly<InventoryPreClickEvent> {
+        node.listenOnly<InventoryPreClickEvent> {
             if (InventoryManager.slot(slot) != null) {
                 isCancelled = true
                 return@listenOnly
             }
         }
 
-        eventNode.listenOnly<ItemDropEvent> {
+        node.listenOnly<ItemDropEvent> {
             if (InventoryManager.hasItem(itemStack)) {
                 isCancelled = true
                 return@listenOnly
             }
         }
+
+        log.info("[Gooey] has been enabled!")
+
+        return LoadStatus.SUCCESS
     }
 
     override fun terminate() {
-        logger.info("[Gooey] has been disabled!")
+        log.info("[Gooey] has been disabled!")
     }
 
 }
