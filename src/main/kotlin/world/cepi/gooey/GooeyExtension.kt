@@ -3,6 +3,7 @@ package world.cepi.gooey
 import net.minestom.server.event.inventory.InventoryPreClickEvent
 import net.minestom.server.event.item.ItemDropEvent
 import net.minestom.server.event.player.PlayerSpawnEvent
+import net.minestom.server.event.player.PlayerSwapItemEvent
 import net.minestom.server.extensions.Extension;
 import world.cepi.kstom.event.listenOnly
 import world.cepi.kstom.util.log
@@ -18,6 +19,18 @@ class GooeyExtension : Extension() {
 
         node.listenOnly<InventoryPreClickEvent> {
             if (InventoryManager.slot(slot) != null) {
+                isCancelled = true
+                return@listenOnly
+            }
+        }
+
+        node.listenOnly<PlayerSwapItemEvent> {
+            if (InventoryManager.hasItem(mainHandItem)) {
+                isCancelled = true
+                return@listenOnly
+            }
+
+            if (InventoryManager.hasItem(offHandItem)) {
                 isCancelled = true
                 return@listenOnly
             }
